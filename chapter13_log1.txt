@@ -1,0 +1,80 @@
+E:\Tutorials\automate>python
+Python 3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021, 20:19:38) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import openpyxl
+>>> from openpyxl.styles import Font
+>>> wb = openpyxl.Workbook()
+>>> sheet = wb["Sheet"]
+>>> italic24Font = Font(size=24, italic=True)
+>>> sheet["A1"].font = italic24Font
+>>> sheet["A1"] = "Hello, world!"
+>>> wb.save("styles.xlsx")
+>>> fontObj1 = Font(name="Verdana", bold=True)
+>>> sheet["A2"].font = fontObj1
+>>> sheet["A2"] = "Bold Verdana"
+>>> fontObj2 = Font(size=24, italic=True)
+>>> sheet["B3"].font = fontObj2
+>>> sheet["B3"] = "24 pt Italic"
+>>> wb.save("styles.xlsx")
+>>> wb = openpyxl.Workbook()
+>>> sheet["B9"] = "=SUM(B1:B8)"
+>>> wb.save("writeFormula.xlsx")
+>>> sheet = wb["Sheet"]
+>>> sheet["B9"] = "=SUM(B1:B8)"
+>>> wb.save("writeFormula.xlsx")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\openpyxl\workbook\workbook.py", line 407, in save
+    save_workbook(self, filename)
+  File "C:\Python39\lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+  File "C:\Python39\lib\zipfile.py", line 1239, in __init__
+    self.fp = io.open(file, filemode)
+PermissionError: [Errno 13] Permission denied: 'writeFormula.xlsx'
+>>> wb.save("writeFormula.xlsx")
+>>> wb.active
+<Worksheet "Sheet">
+>>> sheet = wb.active
+>>> sheet["A1"] = 200
+>>> sheet["A2"] = 300
+>>> sheet["A3"] = "=SUM(A1:A2)"
+>>> wb.save("writeFormula.xlsx")
+>>> wb = openpyxl.Workbook()
+>>> sheet = wb.active
+>>> sheet["A1"] = "Tall row"
+>>> sheet["B2"] = "Wide column"
+>>> sheet.row_dimensions[1].height = 70
+>>> sheet.column_dimensions["B"].width = 20
+>>> wb.save("dimensions.xlsx")
+>>> wb = openpyxl.Workbook()
+>>> sheet = wb.active
+>>> sheet.merge_cells("A1:D3")
+>>> sheet["A1"] = "Twelve cells merged together."
+>>> sheet.merge_cells("C5:D5")
+>>> sheet["C5"] = "Two merged cells."
+>>> wb.save("merged.xlsx")
+>>> wb = openpyxl.load_workbook("merged.xlsx")
+>>> sheet = wb.active
+>>> sheet.unmerge_cells("A1:D3")
+>>> sheet.unmerge_cells("C5:D5")
+>>> wb.save("merged.xlsx")
+>>> wb = openpyxl.load_workbook("produceSales.xlsx")
+>>> sheet = wb.active
+>>> sheet.freeze_panes = "A2"
+>>> wb.save("freezeExample.xlsx")
+>>> wb = openpyxl.Workbook()
+>>> sheet = wb.active
+>>> for i in range(1, 11):
+...     sheet["A" + str(i)] = i
+...
+>>> refObj = openpyxl.chart.Reference(sheet, min_col=1, min_row=1, max_col=1, max_row=10)
+>>> seriesObj = openpyxl.chart.Series(refobj, title="First Series")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'refobj' is not defined
+>>> seriesObj = openpyxl.chart.Series(refObj, title="First Series")
+>>> chartObj = openpyxl.chart.BarChart()
+>>> chartObj.title = "My Chart"
+>>> chartObj.append(seriesObj)
+>>> sheet.add_chart(chartObj, "C5")
+>>> wb.save("sampleChart.xlsx")

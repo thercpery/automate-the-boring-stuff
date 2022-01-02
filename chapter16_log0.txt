@@ -1,0 +1,105 @@
+E:\Tutorials\automate>python
+Python 3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021, 20:19:38) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import csv
+>>> exampleFile = open("example.csv")
+>>> exampleReader = csv.reader(exampleFile)
+>>> exampleReader
+<_csv.reader object at 0x00000293364F27C0>
+>>> exampleData = list(exampleReader)
+>>> exampleData
+[['4/5/2014 13:34', 'Apples', '73'], ['4/5/2014 3:41', 'Cherries', '85'], ['4/6/2014 12:46', 'Pears', '14'], ['4/8/2014 8:59', 'Oranges', '52'], ['4/10/2014 2:07', 'Apples', '152'], ['4/10/2014 18:10', 'Bananas', '23'], ['4/10/2014 2:40', 'Strawberries', '98']]
+>>> exampleData[0]
+['4/5/2014 13:34', 'Apples', '73']
+>>> example[0][0]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'example' is not defined
+>>> exampleData[0][0]
+'4/5/2014 13:34'
+>>> exampleData[0][1]
+'Apples'
+>>> exampleData[0][2]
+'73'
+>>> exampleData[1][1]
+'Cherries'
+>>> exampleData[6][1]
+'Strawberries'
+>>> for row in exampleReader:
+...     print(f"Row #{exampleReader.line_num} {row}")
+...
+>>> for row in exampleReader:
+...     print(f"Row #{exampleReader.line_num} {row}")
+...
+>>> import csv
+>>> exampleFile = open("example.csv")
+>>> exampleReader = csv.reader(exampleFile)
+>>> for row in exampleReader:
+...     print(f"Row #{exampleReader.line_num} {row}")
+...
+Row #1 ['4/5/2014 13:34', 'Apples', '73']
+Row #2 ['4/5/2014 3:41', 'Cherries', '85']
+Row #3 ['4/6/2014 12:46', 'Pears', '14']
+Row #4 ['4/8/2014 8:59', 'Oranges', '52']
+Row #5 ['4/10/2014 2:07', 'Apples', '152']
+Row #6 ['4/10/2014 18:10', 'Bananas', '23']
+Row #7 ['4/10/2014 2:40', 'Strawberries', '98']
+>>> import csv
+>>> outputFile = open("output.csv", "w+", newline="")
+>>> outputWriter = csv.writer(outputFile)
+>>> outputWriter.writerow(["spam", "eggs", "bacon", "ham"])
+21
+>>> outputWriter.writerow(["Hello, world!", "eggs", "bacon", "ham"])
+32
+>>> outputWriter.writerow([1,2,3.141592,4])
+16
+>>> outputFile.close()
+>>> import csv
+>>> csvFile = open("example.tsv", "w", newline="")
+>>> csvWriter = csv.writer(csvFile, delimiter="\t", lineterminator="\n\n")
+>>> csvWriter.writerow(["apples", "oranges", "grapes"])
+23
+>>> csvWriter.writerow(["eggs", "bacon", "ham"])
+16
+>>> csvWriter.writerow(["spam", "spam", "spam", "spam", "spam", "spam"])
+31
+>>> csvFile.close()
+>>> import csv
+>>> exampleFile = open("exampleWithHeader.csv")
+>>> exampleDictReader = csv.DictReader(exampleFile)
+>>> for row in exampleDictReader:
+...     print(row["Timestamp"], row["Fruit"], row["Quantity"])
+...
+4/5/2014 13:34 Apples 73
+4/5/2014 3:41 Cherries 85
+4/6/2014 12:46 Pears 14
+4/8/2014 8:59 Oranges 52
+4/10/2014 2:07 Apples 152
+4/10/2014 18:10 Bananas 23
+4/10/2014 2:40 Strawberries 98
+>>> import csv
+>>> exampleFile = open("example.csv")
+>>> exampleDictReader = csv.DictReader(exampleFile, ["time", "name", "amount"])
+>>> for row in exampleDictReader:
+...     print(row["time"], row["name"], row["amount"])
+...
+4/5/2014 13:34 Apples 73
+4/5/2014 3:41 Cherries 85
+4/6/2014 12:46 Pears 14
+4/8/2014 8:59 Oranges 52
+4/10/2014 2:07 Apples 152
+4/10/2014 18:10 Bananas 23
+4/10/2014 2:40 Strawberries 98
+>>> import csv
+>>> outputFile = open("output.csv", "w", newline="")
+>>> outputDictWriter = csv.DictWriter(outputFile, ["Name", "Pet", "Phone"])
+>>> outputDictWriter.writeheader()
+16
+>>> outputDictWriter.writerow({"Name": "Alice", "Pet": "cat", "Phone": "555-1234"})
+20
+>>> outputDictWriter.writerow({"Name": "Bob", "Phone": "555-1234"})
+15
+>>> outputDictWriter.writerow({"Phone": "555-5555", "Name": "Carol", "Pet": "dog"})
+20
+>>> outputFile.close()
+>>> ^Z

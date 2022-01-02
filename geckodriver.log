@@ -1,0 +1,33 @@
+1634983022574	geckodriver	INFO	Listening on 127.0.0.1:50396
+1634983025623	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50397" "-no-remote" "-profile" "C:\\Users\\RCPERY~1\\AppData\\Local\\Temp\\rust_mozprofile2Yfxdk"
+1634983026548	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\RC Pery\\AppData\\Local\\Temp\\rust_mozprofile2Yfxdk\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:50397/devtools/browser/4c0af3b8-85fd-463c-ba2c-3cf17c5445ec
+1634983029305	Marionette	INFO	Listening on port 50405
+1634983029350	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1634983060543	Marionette	INFO	Stopped listening on port 50405
+JavaScript error: resource:///modules/Interactions.jsm, line 230: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1634983329170	geckodriver	INFO	Listening on 127.0.0.1:62228
+1634983332190	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "62229" "-no-remote" "-profile" "C:\\Users\\RCPERY~1\\AppData\\Local\\Temp\\rust_mozprofileMwdL38"
+1634983332549	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\RC Pery\\AppData\\Local\\Temp\\rust_mozprofileMwdL38\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:62229/devtools/browser/33693081-a13a-4732-af2b-586c4b0da360
+1634983334889	Marionette	INFO	Listening on port 62235
+1634983335396	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://inventwithpython.com/js/bootstrap.min.js, line 7: Error: Bootstrap tooltips require Tether (http://tether.io/)
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1634983897068	Marionette	INFO	Stopped listening on port 62235
+JavaScript error: resource:///modules/Interactions.jsm, line 230: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+PERY~1\\AppData\\Local\\Temp\\rust_mozprofileGtbb7y"
+1634983875584	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\RC Pery\\AppData\\Local\\Temp\\rust_mozprofileGtbb7y\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:60710/devtools/browser/4b46a429-9857-46e8-a686-564883fb7cbf
+1634983878070	Marionette	INFO	Listening on port 65187
+1634983878372	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://inventwithpython.com/js/bootstrap.min.js, line 7: Error: Bootstrap tooltips require Tether (http://tether.io/)
+JavaScript error: https://inventwithpython.com/js/bootstrap.min.js, line 7: Error: Bootstrap tooltips require Tether (http://tether.io/)
+1634984262319	Marionette	INFO	Stopped listening on port 65187
+JavaScript error: resource:///modules/Interactions.jsm, line 230: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]

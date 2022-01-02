@@ -1,0 +1,41 @@
+E:\Tutorials\automate>python
+Python 3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021, 20:19:38) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import datetime
+>>> datetime.datetime.now()
+datetime.datetime(2021, 12, 23, 21, 20, 6, 814108)
+>>> dt = datetime.datetime(2021, 12, 23, 16, 29, 0)
+>>> dt.year
+2021
+>>> dt.month
+12
+>>> dt.day
+23
+>>> dt.hour
+16
+>>> dt.minute
+29
+>>> dt.second
+0
+>>> import time
+>>> datetime.datetime.fromtimestamp(1000000)
+datetime.datetime(1970, 1, 12, 21, 46, 40)
+>>> datetime.datetime.fromtimestamp(time.time())
+datetime.datetime(2021, 12, 23, 21, 27, 51, 371306)
+>>> halloween2021 = datetime.datetime(2021, 10, 31, 0, 0, 0)
+>>> newYears2022 = datetime.datetime(2022, 1, 1, 0, 0, 0)
+>>> xmas2021 = datetime.datetime(2021, 12, 25, 0, 0, 0)
+>>> oct31_2021 = datetime.datetime(2021, 10, 31, 0, 0, 0)
+>>> halloween2021 == oct31_2021
+True
+>>> halloween2021 > newYears2022
+False
+>>> newYears2021 > halloween2021
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'newYears2021' is not defined
+>>> newYears2022 > halloween2021
+True
+>>> newYears2022 != oct31_2021
+True
+>>>

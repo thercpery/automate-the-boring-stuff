@@ -1,0 +1,48 @@
+E:\Tutorials\automate>python
+Python 3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021, 20:19:38) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import time
+>>> time.time
+<built-in function time>
+>>> time.time()
+1640263725.181541
+>>>
+KeyboardInterrupt
+>>> ^Z
+
+
+E:\Tutorials\automate>python calcProd.py
+The result is 456569 digits long.
+I took 3.179234266281128 seconds to calculate.
+
+E:\Tutorials\automate>python
+Python 3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021, 20:19:38) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import time
+>>> time.ctime()
+'Thu Dec 23 20:53:32 2021'
+>>> thisMoment = time.time()
+>>> time.ctime(thisMoment)
+'Thu Dec 23 20:53:45 2021'
+>>> for i in range(3):
+...     print("Tick")
+...     time.sleep(1)
+...     print("Tock")
+...     time.sleep(1)
+...
+Tick
+Tock
+Tick
+Tock
+Tick
+Tock
+>>> time.sleep(5)
+>>> now = time.time()
+>>> now
+1640264138.123888
+>>> round(now, 2)
+1640264138.12
+>>> round(now, 4)
+1640264138.1239
+>>> round(now)
+1640264138

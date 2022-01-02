@@ -1,0 +1,225 @@
+import pyinputplus
+>>> import pyinputplus as pyip
+>>> response = pyip.inputNum()
+five
+'five' is not a number.
+42
+>>> response
+42
+>>> type(response)
+<class 'int'>
+>>> response = input("Enter a number:")
+Enter a number:42
+>>> response
+'42'
+>>> type(response)
+<class 'str'>
+>>> import pyinputplus as pyip
+>>> response = pyip.inputInt(prompt="Enter a number: ")
+Enter a number: cat
+'cat' is not an integer.
+Enter a number: 42
+>>> response
+42
+>>> type(response)
+<class 'int'>
+>>> response = pyip.inputNum("Enter num: ", min=4)
+Enter num: 3
+Number must be at minimum 4.
+Enter num: 2
+Number must be at minimum 4.
+Enter num: 1
+Number must be at minimum 4.
+Enter num: 0
+Number must be at minimum 4.
+Enter num: 5
+>>> response
+5
+>>> response = pyip.inputNum("Enter num: ", greaterThan=4)
+Enter num: 4
+Number must be greater than 4.
+Enter num: 12
+>>> response
+12
+>>> response = pyip.inputNum(">", min=4, lessThan=6)
+>12
+Number must be less than 6.
+>0
+Number must be at minimum 4.
+>1
+Number must be at minimum 4.
+>2
+Number must be at minimum 4.
+>3
+Number must be at minimum 4.
+>4
+>>> response
+4
+>>> response = pyip.inputNum("Enter num: ")
+Enter num:
+Blank values are not allowed.
+Enter num: 22
+>>> response
+22
+>>> response = pyip.inputNum(blank=True)
+
+>>> type(response)
+<class 'str'>
+>>> response
+''
+>>> response = pyinput.inputNum(limit=2)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'pyinput' is not defined
+>>> response = pyip.inputNum(limit=2)
+blah
+'blah' is not a number.
+number
+'number' is not a number.
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\pysimplevalidate\__init__.py", line 512, in validateNum
+    numericValue = int(value)
+ValueError: invalid literal for int() with base 10: 'number'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\pyinputplus\__init__.py", line 167, in _genericInput
+    possibleNewUserInput = validationFunc(
+  File "C:\Python39\lib\site-packages\pyinputplus\__init__.py", line 385, in <lambda>
+    validationFunc = lambda value: pysv.validateNum(
+  File "C:\Python39\lib\site-packages\pysimplevalidate\__init__.py", line 514, in validateNum
+    _raiseValidationException(_("%r is not a number.") % (_errstr(value)), excMsg)
+  File "C:\Python39\lib\site-packages\pysimplevalidate\__init__.py", line 222, in _raiseValidationException
+    raise ValidationException(str(standardExcMsg))
+pysimplevalidate.ValidationException: 'number' is not a number.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\pyinputplus\__init__.py", line 398, in inputNum
+    return _genericInput(
+  File "C:\Python39\lib\site-packages\pyinputplus\__init__.py", line 188, in _genericInput
+    raise limitOrTimeoutException
+pyinputplus.RetryLimitException
+>>> response = pyip.inputNum(timeout=10)
+42
+>>> response = pyip.inputNum(timeout=10)
+42
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\pyinputplus\__init__.py", line 398, in inputNum
+    return _genericInput(
+  File "C:\Python39\lib\site-packages\pyinputplus\__init__.py", line 203, in _genericInput
+    raise TimeoutException()
+pyinputplus.TimeoutException
+>>> response = pyip.inputNum(limit=2, default="N/A")
+hello
+'hello' is not a number.
+world
+'world' is not a number.
+>>> response
+'N/A'
+>>> response = pyip.inputNum(allowRegexes=[r])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'r' is not defined
+>>> response = pyip.inputNum(allowRegexes=[r"(I|V|X|L|C|D|M)+", r"zero"])
+zero
+>>> response
+'zero'
+>>> response = pyip.inputNum(allowRegexes=[r"(I|V|X|L|C|D|M)+", r"zero"])
+XLIV
+>>> response
+'XLIV'
+>>> response = pyip.inputNum(allowRegexes=[r"(i|v|x|l|c|d|m)+", r"zero"])
+xliii
+>>> response
+'xliii'
+>>> response = pyip.inputNum(blockRegexes=[r"[02468]$"])
+42
+This response is invalid.
+44
+This response is invalid.
+22
+This response is invalid.
+25
+>>> response
+25
+>>> response = pyip.inputStr(allowRegexes=[r"caterpillar", "category"], blockRegexes=[r"cat"])
+cat
+This response is invalid.
+catastrophe
+This response is invalid.
+category
+>>> response
+'category'
+>>> response = pyip.inputStr(allowRegexes=[r"caterpillar", "category"], blockRegexes=[r"cat"])
+caterpillar
+>>> response
+'caterpillar'
+>>> def addsToTen(numbers):
+...     numberList = list(numbers)
+...     for i, digits in enumerate(numbersList):
+...             numbersList[i] = int(digit)
+...     if sum(numbersList) != 10:
+...             raise Exception("The digits must add up to 10, not %s" % (sum(numbersList)))
+...     return int(numbers) # Return an int form of numbers.
+...
+>>> response = pyip.inputCustom(addsUpToTen) # no parentheses after addsUpToTen here.
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'addsUpToTen' is not defined
+>>> response = pyip.inputCustom(addsToTen) # no parentheses after addsToTen here.
+123
+name 'numbersList' is not defined
+1234
+name 'numbersList' is not defined
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\pyinputplus\__init__.py", line 305, in inputCustom
+    return _genericInput(
+  File "C:\Python39\lib\site-packages\pyinputplus\__init__.py", line 156, in _genericInput
+    userInput = input()
+KeyboardInterrupt
+>>> def addsToTen(numbers):
+...     numbersList = list(numbers)
+...     for i, digits in enumerate(numbersList):
+...             numbersList[i] = int(digit)
+...     if sum(numbersList) != 10:
+...             raise Exception("The digits must add up to 10, not %s" % (sum(numbersList)))
+...     return int(numbers) # Return an int form of numbers.
+...
+>>> response = pyip.inputCustom(addsToTen) # no parentheses after addsToTen here.
+123
+name 'digit' is not defined
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\pyinputplus\__init__.py", line 305, in inputCustom
+    return _genericInput(
+  File "C:\Python39\lib\site-packages\pyinputplus\__init__.py", line 156, in _genericInput
+    userInput = input()
+KeyboardInterrupt
+>>> def addsUpToTen(numbers):
+...     numbersList = list(numbers)
+...     for i, digit in enumerate(numbersList):
+...             numbersList[i] = int(digit)
+...     if sum(numbersList) != 10:
+...             raise Exception("The digits must add up to 10, not %s" % (sum(numbersList)))
+...     return int(numbers) # Return an int form of numbers.
+...
+>>> response = pyip.inputCustom(addsUpToTen)
+123
+The digits must add up to 10, not 6
+135
+The digits must add up to 10, not 9
+1234
+>>> response
+1234
+>>> response = pyip.inputCustom(addsUpToTen)
+hello
+invalid literal for int() with base 10: 'h'
+55
+>>> response
+55

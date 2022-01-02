@@ -1,0 +1,131 @@
+E:\Tutorials\automate>python
+Python 3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021, 20:19:38) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import doxc
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'doxc'
+>>> import docx
+>>> doc = docx.Document("demo.docx")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\docx\api.py", line 25, in Document
+    document_part = Package.open(docx).main_document_part
+  File "C:\Python39\lib\site-packages\docx\opc\package.py", line 128, in open
+    pkg_reader = PackageReader.from_file(pkg_file)
+  File "C:\Python39\lib\site-packages\docx\opc\pkgreader.py", line 32, in from_file
+    phys_reader = PhysPkgReader(pkg_file)
+  File "C:\Python39\lib\site-packages\docx\opc\phys_pkg.py", line 30, in __new__
+    raise PackageNotFoundError(
+docx.opc.exceptions.PackageNotFoundError: Package not found at 'demo.docx'
+>>> doc = docx.Document("demo.docx")
+>>> len(doc.paragraphs)
+7
+>>> doc.paragraphs
+[<docx.text.paragraph.Paragraph object at 0x00000296C56AF340>, <docx.text.paragraph.Paragraph object at 0x00000296C56AF550>, <docx.text.paragraph.Paragraph object at 0x00000296C56AF460>, <docx.text.paragraph.Paragraph object at 0x00000296C56AF610>, <docx.text.paragraph.Paragraph object at 0x00000296C56AF4C0>, <docx.text.paragraph.Paragraph object at 0x00000296C56AF6A0>, <docx.text.paragraph.Paragraph object at 0x00000296C56AF700>]
+>>> doc.paragraphs.text
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'list' object has no attribute 'text'
+>>> doc.paragraphs[0].text
+'Document Title'
+>>> doc.paragraphs[1].text
+'A plain paragraph with some bold and some italic'
+>>> len(doc.paragraphs[1].runs)
+5
+>>> doc.paragraphs[1].runs[0].text
+'A plain paragraph with'
+>>> doc.paragraphs[1].runs[1].text
+' some '
+>>> doc.paragraphs[1].runs[2].text
+'bold'
+>>> doc.paragraphs[1].runs[3].text
+' and some '
+>>> doc.paragraphs[1].runs[4].text
+'italic'
+>>> import readDocx
+>>> print(readDocx.getText("demo.docx"))
+Document Title
+A plain paragraph with some bold and some italic
+Heading, level 1
+Intense quote
+first item in unordered list
+first item in ordered list
+
+
+>>> import docx
+>>> doc = docx.Document("demo.docx")
+>>> doc.paragraphs[0].text
+'Document Title'
+>>> doc.paragraphs[0].style
+_ParagraphStyle('Title') id: 2846580555392
+>>> doc.paragraphs[0].style
+_ParagraphStyle('Title') id: 2846580554720
+>>> doc.paragraphs[0].style = "Normal"
+>>> doc.paragraphs[1].text
+'A plain paragraph with some bold and some italic'
+>>> (doc.paragraphs[0].text, doc.paragraphs[1].runs[1].text, doc.paragraphs[1].runs[2].text, doc.paragraphs[1].runs[3].text)
+('Document Title', ' some ', 'bold', ' and some ')
+>>> (doc.paragraphs[1].runs[0].text, doc.paragraphs[1].runs[1].text, doc.paragraphs[1].runs[2].text, doc.paragraphs[1].runs[3].text)
+('A plain paragraph with', ' some ', 'bold', ' and some ')
+>>> doc.paragraphs[1].runs[0].style = "QuoteChar"
+C:\Python39\lib\site-packages\docx\styles\styles.py:139: UserWarning: style lookup by style_id is deprecated. Use style name as key instead.
+  return self._get_style_id_from_style(self[style_name], style_type)
+>>> doc.paragraphs[1].runs[0].style = "Quote"
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\docx\text\run.py", line 136, in style
+    style_id = self.part.get_style_id(
+  File "C:\Python39\lib\site-packages\docx\parts\document.py", line 78, in get_style_id
+    return self.styles.get_style_id(style_or_name, style_type)
+  File "C:\Python39\lib\site-packages\docx\styles\styles.py", line 109, in get_style_id
+    return self._get_style_id_from_name(style_or_name, style_type)
+  File "C:\Python39\lib\site-packages\docx\styles\styles.py", line 139, in _get_style_id_from_name
+    return self._get_style_id_from_style(self[style_name], style_type)
+  File "C:\Python39\lib\site-packages\docx\styles\styles.py", line 147, in _get_style_id_from_style
+    raise ValueError(
+ValueError: assigned style is type PARAGRAPH (1), need type CHARACTER (2)
+>>> doc.paragraphs[1].runs[0].style = "QuoteChar"
+>>> doc.paragraphs[1].runs[1].underline = True
+>>> doc.paragraphs[1].runs[3].underline = True
+>>> doc.save("restyled.docx")
+>>> doc = docx.Document()
+>>> doc.add_paragraph("Hello, world!")
+<docx.text.paragraph.Paragraph object at 0x00000296C56AF460>
+>>> doc.save("helloworld.docx")
+>>> doc = docx.Document()
+>>> doc.add_paragraph("Hello, world!")
+<docx.text.paragraph.Paragraph object at 0x00000296C38CA340>
+>>> paraObj1 = doc.add_paragraph("This is a second paragraph.")
+>>> paraObj2 = doc.add_paragraph("This is yet another paragraph.")
+>>> paraObj1.add_run(" This text is being added to the second paragraph.")
+<docx.text.run.Run object at 0x00000296C38CA5E0>
+>>> doc.save("multipleParagraphs.docx")
+>>> doc = docx.Document()
+>>> doc.add_heading("Header 0", 0)
+<docx.text.paragraph.Paragraph object at 0x00000296C72C1B50>
+>>> doc.add_heading("Header 1", 1)
+<docx.text.paragraph.Paragraph object at 0x00000296C72C18E0>
+>>> doc.add_heading("Header 2", 2)
+<docx.text.paragraph.Paragraph object at 0x00000296C72C19D0>
+>>> doc.add_heading("Header 3", 3)
+<docx.text.paragraph.Paragraph object at 0x00000296C38CA1F0>
+>>> doc.add_heading("Header 4", 4)
+<docx.text.paragraph.Paragraph object at 0x00000296C72C1A00>
+>>> doc.save("headings.docx")
+>>> doc = docx.Document()
+>>> doc.add_paragraph("This is on the first page!")
+<docx.text.paragraph.Paragraph object at 0x00000296C56AF760>
+>>> doc.paragraphs[0].runs[0].add_break(docx.enum.text.WD_BREAK_PAGE)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: module 'docx.enum.text' has no attribute 'WD_BREAK_PAGE'
+>>> doc.paragraphs[0].runs[0].add_break(docx.enum.text.WD_BREAK.PAGE)
+>>> doc.add_paragraph("This is on the second page!")
+<docx.text.paragraph.Paragraph object at 0x00000296C38A5FA0>
+>>> doc.save("twoPage.docx")
+>>> doc = docx.Document()
+>>> doc.add_picture("zophie.png", width=docx.shared.Inches(1), height=docx.shared.Cm(4))
+<docx.shape.InlineShape object at 0x00000296C56D65E0>
+>>> doc.save("picture.docx")
+>>> ^Z

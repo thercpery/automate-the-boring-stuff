@@ -1,0 +1,234 @@
+E:\Tutorials\automate>python
+Python 3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021, 20:19:38) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import openpyxl
+>>> wb = openpyxl.load_workbook("example.xlsx")
+>>> type(wb)
+<class 'openpyxl.workbook.workbook.Workbook'>
+>>> wb.sheetnames
+['Sheet1']
+>>>
+KeyboardInterrupt
+>>> ^Z
+
+
+E:\Tutorials\automate>python
+Python 3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021, 20:19:38) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import openpyxl\
+... ^Z
+
+  File "<stdin>", line 1
+    import openpyxl\
+                    ^
+SyntaxError: unexpected EOF while parsing
+>>> import openpyxl
+>>> wb = openpyxl.load_workbook("example.xlsx")
+>>> type(wb)
+<class 'openpyxl.workbook.workbook.Workbook'>
+>>> wb.sheetnames
+['Sheet1', 'Sheet2', 'Sheet3']
+>>> sheet = wb["Sheet3"]
+>>> sheet
+<Worksheet "Sheet3">
+>>> sheet.title
+'Sheet3'
+>>> anotherSheet = wb.active
+>>> anotherSheet
+<Worksheet "Sheet1">
+>>> sheet = wb["Sheet1"]
+>>> sheet
+<Worksheet "Sheet1">
+>>> sheet["A1"]
+<Cell 'Sheet1'.A1>
+>>> sheet["A1"].value
+'4/5/2015 1:34:02 PM'
+>>> sheet["A2"].value
+datetime.datetime(2015, 4, 5, 15, 41, 23)
+>>> c = sheet["B1"]
+>>> c.value
+'Apples'
+>>> f"Row {c.row}, Column {c.column} is {c.value}"
+'Row 1, Column 2 is Apples'
+>>> f"Cell {c.coordinate} is {c.value}"
+'Cell B1 is Apples'
+>>> sheet["C1"].value
+73
+>>> sheet.cell(row=1, column=2)
+<Cell 'Sheet1'.B1>
+>>> sheet.cell(row=1, column=2).value
+'Apples'
+>>> for i in range(1, 8, 2):
+...     print(i, sheet.cell(row=i, column=2).value)
+...
+1 Apples
+3 Pears
+5 Apples
+7 Strawberries
+>>> sheet = wb["Sheet1"]
+>>> sheet.max_row
+7
+>>> sheet.max_column
+3
+>>> sheet.cell(row=1, column=1)
+<Cell 'Sheet1'.A1>
+>>> sheet.cell(row=1, column=1).value
+'4/5/2015 1:34:02 PM'
+>>> sheet.cell(row=2, column=1).value
+datetime.datetime(2015, 4, 5, 15, 41, 23)
+>>> from openpyxl.utils import get_column_letter, column_index_from_string
+>>> get_column_letter(1)
+'A'
+>>> get_column_letter(2)
+'B'
+>>> get_column_letter(27)
+'AA'
+>>> get_column_letter(666)
+'YP'
+>>> get_column_letter(900)
+'AHP'
+>>> get_column_letter(1000000000000000)
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\openpyxl\utils\cell.py", line 110, in get_column_letter
+    return _STRING_COL_CACHE[idx]
+KeyError: 1000000000000000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\openpyxl\utils\cell.py", line 112, in get_column_letter
+    raise ValueError("Invalid column index {0}".format(idx))
+ValueError: Invalid column index 1000000000000000
+>>> get_column_letter(100000)
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\openpyxl\utils\cell.py", line 110, in get_column_letter
+    return _STRING_COL_CACHE[idx]
+KeyError: 100000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\openpyxl\utils\cell.py", line 112, in get_column_letter
+    raise ValueError("Invalid column index {0}".format(idx))
+ValueError: Invalid column index 100000
+>>> get_column_letter(1000)
+'ALL'
+>>> get_column_letter(9999)
+'NTO'
+>>> get_column_letter(10000)
+'NTP'
+>>> get_column_letter(50000)
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\openpyxl\utils\cell.py", line 110, in get_column_letter
+    return _STRING_COL_CACHE[idx]
+KeyError: 50000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\openpyxl\utils\cell.py", line 112, in get_column_letter
+    raise ValueError("Invalid column index {0}".format(idx))
+ValueError: Invalid column index 50000
+>>> get_column_letter(49999)
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\openpyxl\utils\cell.py", line 110, in get_column_letter
+    return _STRING_COL_CACHE[idx]
+KeyError: 49999
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\openpyxl\utils\cell.py", line 112, in get_column_letter
+    raise ValueError("Invalid column index {0}".format(idx))
+ValueError: Invalid column index 49999
+>>> get_column_letter(20000)
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\openpyxl\utils\cell.py", line 110, in get_column_letter
+    return _STRING_COL_CACHE[idx]
+KeyError: 20000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\openpyxl\utils\cell.py", line 112, in get_column_letter
+    raise ValueError("Invalid column index {0}".format(idx))
+ValueError: Invalid column index 20000
+>>> get_column_letter(19000)
+Traceback (most recent call last):
+  File "C:\Python39\lib\site-packages\openpyxl\utils\cell.py", line 110, in get_column_letter
+    return _STRING_COL_CACHE[idx]
+KeyError: 19000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\openpyxl\utils\cell.py", line 112, in get_column_letter
+    raise ValueError("Invalid column index {0}".format(idx))
+ValueError: Invalid column index 19000
+>>> get_column_letter(15000)
+'VDX'
+>>> wb = openpyxl.load_workbook("example.xlsx")
+>>> sheet = wb["Sheet1"]
+>>> get_column_letter(sheet.max_column)
+'C'
+>>> column_index_from_string("A")
+1
+>>> column_index_from_string("AA")
+27
+>>> column_index_from_string("ZZZ")
+18278
+>>> tuple(sheet["A1":"C3"])
+((<Cell 'Sheet1'.A1>, <Cell 'Sheet1'.B1>, <Cell 'Sheet1'.C1>), (<Cell 'Sheet1'.A2>, <Cell 'Sheet1'.B2>, <Cell 'Sheet1'.C2>), (<Cell 'Sheet1'.A3>, <Cell 'Sheet1'.B3>, <Cell 'Sheet1'.C3>))
+>>> for rowOfCellObjects in sheet["A1":"C3"]:
+...     for cellObj in rowOfCellObjects:
+...             print(cellObj.coordinate, cellObj.value)
+...
+A1 4/5/2015 1:34:02 PM
+B1 Apples
+C1 73
+A2 2015-04-05 15:41:23
+B2 Cherries
+C2 85
+A3 2015-04-06 12:46:51
+B3 Pears
+C3 14
+>>> for rowOfCellObjects in sheet["A1":"C3"]:
+...     for cellObj in rowOfCellObjects:
+...             print(cellObj.coordinate, cellObj.value)
+...     print("-- END OF ROW --")
+...
+A1 4/5/2015 1:34:02 PM
+B1 Apples
+C1 73
+-- END OF ROW --
+A2 2015-04-05 15:41:23
+B2 Cherries
+C2 85
+-- END OF ROW --
+A3 2015-04-06 12:46:51
+B3 Pears
+C3 14
+-- END OF ROW --
+>>> sheet.columns
+<generator object Worksheet._cells_by_col at 0x000002B00F8AD820>
+>>> list(sheet.columns)
+[(<Cell 'Sheet1'.A1>, <Cell 'Sheet1'.A2>, <Cell 'Sheet1'.A3>, <Cell 'Sheet1'.A4>, <Cell 'Sheet1'.A5>, <Cell 'Sheet1'.A6>, <Cell 'Sheet1'.A7>), (<Cell 'Sheet1'.B1>, <Cell 'Sheet1'.B2>, <Cell 'Sheet1'.B3>, <Cell 'Sheet1'.B4>, <Cell 'Sheet1'.B5>, <Cell 'Sheet1'.B6>, <Cell 'Sheet1'.B7>), (<Cell 'Sheet1'.C1>, <Cell 'Sheet1'.C2>, <Cell 'Sheet1'.C3>, <Cell 'Sheet1'.C4>, <Cell 'Sheet1'.C5>, <Cell 'Sheet1'.C6>, <Cell 'Sheet1'.C7>)]
+>>> list(sheet.columns)[1]
+(<Cell 'Sheet1'.B1>, <Cell 'Sheet1'.B2>, <Cell 'Sheet1'.B3>, <Cell 'Sheet1'.B4>, <Cell 'Sheet1'.B5>, <Cell 'Sheet1'.B6>, <Cell 'Sheet1'.B7>)
+>>> for cellObj in list(sheet.columns)[1]:
+...     print(cellObj.value)
+...
+Apples
+Cherries
+Pears
+Oranges
+Apples
+Bananas
+Strawberries
+>>> ^Z

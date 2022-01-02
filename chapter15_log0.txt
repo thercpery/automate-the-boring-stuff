@@ -1,0 +1,117 @@
+E:\Tutorials\automate>python
+Python 3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021, 20:19:38) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import PyPDF2
+>>> pdfFileObj = open("meetingminutes.pdf", "rb")
+>>> pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+>>> pdfReader.numPages
+19
+>>> pageObj = pdfReader.getPage(0)
+>>> pageObj.extractText()
+'OOFFFFIICCIIAALL  BBOOAARRDD  MMIINNUUTTEESS   Meeting of \nMarch 7\n, 2014\n        \n     The Board of Elementary and Secondary Education shall provide leadership and \ncreate policies for education that expand opportunities for children, empower \nfamilies and communities, and advance Louisiana in an increasingly \ncompetitive glob\nal market.\n BOARD \n of ELEMENTARY\n and \n SECONDARY\n EDUCATION\n  '
+>>> pdfFileObj.close()
+>>> pdfReader = PyPDF2.PdfFileReader(open("encrypted.pdf", "rb"))
+>>> pdfReader.isEncrypted
+True
+>>> pdfReader.getPage(0\)
+  File "<stdin>", line 1
+    pdfReader.getPage(0\)
+                        ^
+SyntaxError: unexpected character after line continuation character
+>>> pdfReader.getPage(0)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\PyPDF2\pdf.py", line 1176, in getPage
+    self._flatten()
+  File "C:\Python39\lib\site-packages\PyPDF2\pdf.py", line 1505, in _flatten
+    catalog = self.trailer["/Root"].getObject()
+  File "C:\Python39\lib\site-packages\PyPDF2\generic.py", line 516, in __getitem__
+    return dict.__getitem__(self, key).getObject()
+  File "C:\Python39\lib\site-packages\PyPDF2\generic.py", line 178, in getObject
+    return self.pdf.getObject(self).getObject()
+  File "C:\Python39\lib\site-packages\PyPDF2\pdf.py", line 1617, in getObject
+    raise utils.PdfReadError("file has not been decrypted")
+PyPDF2.utils.PdfReadError: file has not been decrypted
+>>> pdfReader.decrypt("rosebud")
+1
+>>> pageObj = pdfReader.getPage(0)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\site-packages\PyPDF2\pdf.py", line 1177, in getPage
+    return self.flattenedPages[pageNumber]
+IndexError: list index out of range
+>>> pdfReader = PyPDF2.PdfFileReader(open("encrypted.pdf", "rb"))
+>>> pdfReader.decrypt("rosebud")
+1
+>>> pageObj = pdfReader.getPage(0)
+>>> pdf1File = open("meetingminutes.pdf", "rb")
+>>> pdf2File = open("meetingminutes2.pdf", "rb")
+>>> pdf1Reader = PyPDF2.PdfFileReader(pdf1File)
+>>> pdf2Reader = PyPDF2.PdfFileReader(pdf2File)
+>>> pdfWriter = PyPDF2.PdfFileWriter()
+>>> for pageNum in range(pdf1Reader.numPages):
+...     pageObj = pdf1Reader.getPage(pageNum)
+...     pdfWriter.addPage(pageObj)
+...
+>>> for pageNum in range(pdf2Reader.numPages):
+...     pageObj = pdf2Reader.getPage(pageNum)
+...     pdfWriter.addPage(pageObj)
+...
+>>> pdfOutputFile = open("combinedminutes.pdf", "wb")
+>>> pdfWriter.write(pdfOutputFile)
+>>> pdfOutputFile.close()
+>>> pdf1File.close()
+>>> pdf2File.close()
+>>> minutesFile = open("meetingminutes.pdf", "rb")
+>>> pdfReader = PyPDF2.PdfFileReader(minutesFile)
+>>> page = pdfReader.getPage(0)
+>>> page.rotateClockwise(90)
+{'/Contents': [IndirectObject(961, 0), IndirectObject(962, 0), IndirectObject(963, 0), IndirectObject(964, 0), IndirectObject(965, 0), IndirectObject(966, 0), IndirectObject(967, 0), IndirectObject(968, 0)], '/CropBox': [0, 0, 612, 792], '/MediaBox': [0, 0, 612, 792], '/Parent': IndirectObject(953, 0), '/Resources': {'/ColorSpace': {'/CS0': IndirectObject(975, 0), '/CS1': IndirectObject(976, 0), '/CS2': IndirectObject(976, 0)}, '/ExtGState': {'/GS0': IndirectObject(977, 0)}, '/Font': {'/TT0': IndirectObject(979, 0), '/TT1': IndirectObject(981, 0), '/TT2': IndirectObject(983, 0), '/TT3': IndirectObject(985, 0), '/TT4': IndirectObject(987, 0), '/TT5': IndirectObject(989, 0)}, '/XObject': {'/Im0': IndirectObject(973, 0)}}, '/Rotate': 90, '/StructParents': 0, '/Type': '/Page'}
+>>> pdfWriter = PyPDF2.PdfFileWriter()
+>>> pdfWriter.addPage(page)
+>>> resultPdfFile = open("rotatedPage.pdf", "wb")
+>>> pdfWriter.write(resultPdfFile)
+>>> resultPdfFile.close()
+>>> minutesFile.close()
+>>> minutesFile = open("meetingminutes.pdf", "rb")
+>>> pdfReader = PyPDF2.PdfFileReader(minutesFile)
+>>> minutesFirstPage = PyPDF2.PdfFileReader(open("watermark.pdf", "rb"))
+>>> minutesFirstPage = pdfReader.getPage(0)
+>>> pdfWatermarkReader = PyPDF2.PdfFileReader(open("watermark.pdf", "rb"))
+>>> minutesFirstPage.mergePage(pdfWatermarkReader.getPage(0))
+>>> pdfWriter = PyPDF2.PdfFileWriter()
+>>> pdfWriter.addPage(minutesFirstPage)
+>>> for pageNum in range(1, pdfReader.numPages);
+  File "<stdin>", line 1
+    for pageNum in range(1, pdfReader.numPages);
+                                               ^
+SyntaxError: invalid syntax
+>>> for pageNum in range(1, pdfReader.numPages):
+...     pageObj = pdfReader.getPage(pageNum)
+...     pdfWriter.add(pageObj)
+...
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+AttributeError: 'PdfFileWriter' object has no attribute 'add'
+>>> for pageNum in range(1, pdfReader.numPages):
+...     pageObj = pdfReader.getPage(pageNum)
+...     pdfWriter.addPage(pageObj)
+...
+>>> resultPdfFile = open("watermarkedCover.pdf", "wb")
+>>> pdfWriter.write(resultPdfFile)
+>>> resultPdfFile.close()
+>>> pdfFile = open("meetingminutes.pdf", "rb")
+>>> pdfReader = PyPDF2.PdfFileReader(pdfFile)
+>>> pdfWriter = PyPDF2.PdfFileWriter()
+>>> for pageNum in range(pdfReader.numPages):
+...     pdfWriter.addPage(pdfReader.getPage(pageNum))
+...
+>>> pdfWriter.encrypt("swordfish")
+>>> resultPdf = open("encryptedminutes.pdf")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: 'encryptedminutes.pdf'
+>>> resultPdf = open("encryptedminutes.pdf", "wb")
+>>> pdfWriter.write(resultPdf)
+>>> resultPdf.close()
+>>> ^Z

@@ -1,0 +1,202 @@
+E:\Tutorials\automate>python isPhoneNumber.py
+Is 415-555-4242 a phone number? Let's find out!
+True
+Is "Moshi Moshi": a phone number? Let's find out!
+False
+Phone number found
+Phone number found
+Done
+
+E:\Tutorials\automate>python isPhoneNumber.py
+Is 415-555-4242 a phone number?
+True
+Is "Moshi Moshi": a phone number?
+False
+Phone number found
+Phone number found
+Done
+
+E:\Tutorials\automate>python isPhoneNumber.py
+Is 415-555-4242 a phone number?
+True
+Is "Moshi Moshi" a phone number?
+False
+Phone number found
+Phone number found
+Done
+
+E:\Tutorials\automate>python
+Python 3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021, 20:19:38) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import re
+>>> phoneNumRegex = re.compile(r"\d\d\d-\d\d\d-\d\d\d\d")
+>>> phoneNumRegex
+re.compile('\\d\\d\\d-\\d\\d\\d-\\d\\d\\d\\d')
+>>> mo = phoneNumRegex.search("My number is 415-555-4242")
+>>> print("Phone number found: " + mo.group())
+Phone number found: 415-555-4242
+>>> phoneNumRegex = re.compile(r"(\d\d\d)-(\d\d\d-\d\d\d\d)")
+>>> mo = phoneNumRegex.search("My number is 415-555-4242")
+>>> mo.group(1)
+'415'
+>>> mo.group(2)\
+...
+'555-4242'
+>>> mo.group()
+'415-555-4242'
+>>> mo.group() is not ""
+<stdin>:1: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+True
+>>> mo.group() != ""
+True
+>>> mo.groups()
+('415', '555-4242')
+>>> areaCode, mainNumber = mo.groups()
+>>> print(areaCode)
+415
+>>> print(mainNumber)
+555-4242
+>>> mo.group(1)
+'415'
+>>> phoneNumRegex = re.compile(r"(\(\d\d\d)) (\d\d\d-\d\d\d\d)")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\re.py", line 252, in compile
+    return _compile(pattern, flags)
+  File "C:\Python39\lib\re.py", line 304, in _compile
+    p = sre_compile.compile(pattern, flags)
+  File "C:\Python39\lib\sre_compile.py", line 764, in compile
+    p = sre_parse.parse(p, flags)
+  File "C:\Python39\lib\sre_parse.py", line 962, in parse
+    raise source.error("unbalanced parenthesis")
+re.error: unbalanced parenthesis at position 10
+>>> phoneNumRegex = re.compile(r"(\(\d\d\d)) (\d\d\d-\d\d\d\d)"))
+  File "<stdin>", line 1
+    phoneNumRegex = re.compile(r"(\(\d\d\d)) (\d\d\d-\d\d\d\d)"))
+                                                                ^
+SyntaxError: unmatched ')'
+>>> phoneNumRegex = re.compile(r"(\(\d\d\d\)) (\d\d\d-\d\d\d\d)")
+>>> mo = phoneNumRegex.search("My phone number is (415) 555-4242")
+>>> mo.group(1)
+'(415)'
+>>> areaCode
+'415'
+>>> mo.group(2)
+'555-4242'
+>>> mainNumber
+'555-4242'
+>>> re.compile(r"(\(Parentheses\)")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\re.py", line 252, in compile
+    return _compile(pattern, flags)
+  File "C:\Python39\lib\re.py", line 304, in _compile
+    p = sre_compile.compile(pattern, flags)
+  File "C:\Python39\lib\sre_compile.py", line 764, in compile
+    p = sre_parse.parse(p, flags)
+  File "C:\Python39\lib\sre_parse.py", line 948, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+  File "C:\Python39\lib\sre_parse.py", line 443, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+  File "C:\Python39\lib\sre_parse.py", line 836, in _parse
+    raise source.error("missing ), unterminated subpattern",
+re.error: missing ), unterminated subpattern at position 0
+>>> heroRegex = re.compile(r"Batman|Tina Fey")
+>>> mo1 = heroRegex.search("Batman and Tina Fey")
+>>> mo1.group()
+'Batman'
+>>> mo2 = heroRegex.search("Tina Fey and Batman")
+>>> mo2
+<re.Match object; span=(0, 8), match='Tina Fey'>
+>>> mo2.group()
+'Tina Fey'
+>>> mo2.groups()
+()
+>>> mo2.group(1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: no such group
+>>> batRegex = re.compile(r"Bat(man|mobile|copter|bat)")
+>>> mo = batRegex.search("Batmobile lost a wheel")
+>>> mo.group()
+'Batmobile'
+>>> mo.group(2)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: no such group
+>>> mo.group(1)
+'mobile'
+>>> mo.group(0)
+'Batmobile'
+>>> batRegex = re.compile(r"Bat(wo)?man")
+>>> mo1 = batRegex.search("The adventures of Batman")
+>>> mo1.group()
+'Batman'
+>>> mo1.group != ""
+True
+>>> mo2 = batRegex.search("The adventures of Batwoman")
+>>> mo2.group()
+'Batwoman'
+>>> phoneRegex = re.compile(r"(\d\d\d-)?\d\d\d-\d\d\d\d")
+>>> mo1 = phoneRegex.search("My number is 415-555-4242")
+>>> mo1.group()
+'415-555-4242'
+>>> mo2 = phoneRegex.search("My number is 555-4242")
+>>> mo2.group()
+'555-4242'
+>>> batRegex = re.compile(r"Bat(wo)*man")
+>>> mo1 = batRegex.search("The adventures of Batman")
+>>> mo1.group()
+'Batman'
+>>> mo2 = batRegex.search("The adventures of Batwoman")
+>>> mo2
+<re.Match object; span=(18, 26), match='Batwoman'>
+>>> mo2.group()
+'Batwoman'
+>>> mo3 = batRegex.search("The adventures of Batwowowowoman")
+>>> mo3
+<re.Match object; span=(18, 32), match='Batwowowowoman'>
+>>> mo3.group()
+'Batwowowowoman'
+>>> batRegex = re.compile(r"Bat(wo)+man")
+>>> mo1 = batRegex.search("The adventures of Batwoman")
+>>> mo1.group()
+'Batwoman'
+>>> mo2 = batRegex.search("The adventures of Batwowowowoman")
+>>> mo2.group()
+'Batwowowowoman'
+>>> mo3 = batRegex.search("The adventures of Batman")
+>>> mo3.group()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'NoneType' object has no attribute 'group'
+>>> mo3 == None
+True
+>>> haRegex = re.compile(r"(Ha){3}")
+>>> mo1 = haRegex.search("HaHaHa")
+>>> mo1.group()
+'HaHaHa'
+>>> mo2 = haRegex.search("hahaha")
+>>> mo2.group()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'NoneType' object has no attribute 'group'
+>>> mo2.group() == ""
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'NoneType' object has no attribute 'group'
+>>> mo2.group() == None
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'NoneType' object has no attribute 'group'
+>>> type(mo2)
+<class 'NoneType'>
+>>> mo2 == None
+True
+>>> mo2 = haRegex.search("Ha")
+>>> mo2.group()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'NoneType' object has no attribute 'group'
+>>> mo2 == None
+True

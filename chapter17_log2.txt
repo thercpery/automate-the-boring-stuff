@@ -1,0 +1,73 @@
+E:\Tutorials\automate>python
+Python 3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021, 20:19:38) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import time
+>>> import datetime
+>>> delta = datetime.timedelta(days=11, hours=10, minutes=9, seconds=8)
+>>> delta.days
+11
+>>> delta.seconds
+36548
+>>> delta.microseconds
+0
+>>> delta.total_seconds()
+986948.0
+>>> dt = datetime.datetime.now()
+>>> dt
+datetime.datetime(2021, 12, 24, 11, 56, 32, 268725)
+>>> thousandDays = datetime.timedelta(days=1000)
+>>> dt + thousandDays
+datetime.datetime(2024, 9, 19, 11, 56, 32, 268725)
+>>> oct21st = datetime.datetime(2021, 10, 21, 16, 29, 0)
+>>> aboutThirtyYears = datetime.timedelta(days=365 * 30)
+>>> oct21st
+datetime.datetime(2021, 10, 21, 16, 29)
+>>> oct21st + aboutThirtyYears
+datetime.datetime(2051, 10, 14, 16, 29)
+>>> oct21st - (2 * aboutThirtyYears)
+datetime.datetime(1961, 11, 5, 16, 29)
+>>> halloween2022 = datetime.datetime(2022, 10, 31, 0, 0, 0)
+>>> while datetime.datetime.now() < halloween2022:
+...     time.sleep(1)
+...
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+KeyboardInterrupt
+>>> oct21st = datetime.datetime(2021, 10, 21, 16, 29, 0)
+>>> oct21st.strftime("%Y/%m/%d %H:%M:%S")
+'2021/10/21 16:29:00'
+>>> oct21st.strftime("%I:%M %p")
+'04:29 PM'
+>>> oct21st.strftime("Today is %A")
+'Today is Thursday'
+>>> oct21st.strftime("%d of %B, %y")
+'21 of October, 21'
+>>> oct21st.strftime("%d of %B, %Y")
+'21 of October, 2021'
+>>> datetime.datetime.strptime("October 21, 2021", "%B %d, %Y")
+datetime.datetime(2021, 10, 21, 0, 0)
+>>> datetime.datetime.strptime("2021/10/21 16:29:00", "%Y/%m/%d %H:%M:%S")
+datetime.datetime(2021, 10, 21, 16, 29)
+>>> datetime.datetime.strptime("October of '19", "%B of '%y")
+datetime.datetime(2019, 10, 1, 0, 0)
+>>> datetime.datetime.strptime("April 20, 2069", "%m/%d/%Y")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "C:\Python39\lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data 'April 20, 2069' does not match format '%m/%d/%Y'
+>>> datetime.datetime.strptime("April 20, 2069", "%m %d, %Y")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python39\lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "C:\Python39\lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data 'April 20, 2069' does not match format '%m %d, %Y'
+>>> datetime.datetime.strptime("April 20, 2069", "%B %d, %Y")
+datetime.datetime(2069, 4, 20, 0, 0)
+>>> datetime.datetime.strptime("November of '63", "%B of '%y")
+datetime.datetime(2063, 11, 1, 0, 0)
+>>>
